@@ -6,8 +6,8 @@ function sha256(data) {
   return crypto.createHash('sha256').update(data).digest();
 }
 
-// réplique de $v()
-function lcg(seed) {
+// réplique de $v() et aussi de la fonction dans le sujet
+function customMathRandom(seed) {
   let state = seed >>> 0;
   return () => {
       state = (Math.imul(1664525, state) + 1013904223) >>> 0;
@@ -54,7 +54,7 @@ function derivePrivateKey(timestamp, salt) {
   const c = Buffer.from(r ? `${timestamp}:${r}` : `${timestamp}`, 'utf8');
   const b = sha256(c).readUInt32LE(0);
   const p = Buffer.alloc(32);
-  const rng = lcg(b);
+  const rng = customMathRandom(b);
   for (let i = 0; i < 32; i++) {
     p[i] = Math.floor(rng() * 256);
   }
