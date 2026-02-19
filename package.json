@@ -1,5 +1,26 @@
 {
   "dependencies": {
-    "bitcoinjs-lib": "^7.0.1"
-  }
+    "bitcoinjs-lib": "^7.0.1",
+    "ecpair": "^3.0.1",
+    "secp256k1": "^5.0.1",
+    "tiny-secp256k1": "^2.2.4"
+  },
+  "name": "crack_rng",
+  "version": "1.0.0",
+  "description": "",
+  "main": "attack_master.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/overlor-d/crack_RNG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/overlor-d/crack_RNG/issues"
+  },
+  "homepage": "https://github.com/overlor-d/crack_RNG#readme"
 }
