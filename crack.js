@@ -47,38 +47,17 @@ function Pv(seed, func) {
 }
 
 function tp(u, f) {
-
-  const r = Wv(f);
-  const baseStr = r ? `${u}:${r}` : `${u}`;
-  const c = Buffer.from(baseStr, 'utf8');
-  const seed = bl(c).readUInt32LE(0);
-  const p = Buffer.alloc(32);
-
-  Pv(seed, () => {
-    for (let i = 0; i < p.length; i++) {
-      p[i] = Math.floor(Math.random() * 256);
-    }
+  const r = Wv(f), c = pl.from(r ? `${u}:${r}` : `${u}`, "utf8"), b = pl.from(bl(c)).readUInt32LE(0), p = pl.alloc(32);
+  Pv(b, () => {
+    for (let A = 0; A < p.length; A++) p[A] = Math.floor(Math.random() * 256);
   });
-
-  let x = Buffer.from(bl(p));
-  const Jv = 1500;
-  for (let i = 0; i < Jv; i++) {
-    x = Buffer.from(bl(x));
-  }
-
-  while (true) {
-    try {
-      bitcoin.ECPair.fromPrivateKey(x, { network: NETWORK });
-      break;
-    } catch (e) {
-      x = Buffer.from(bl(x));
-    }
-  }
+  let x = pl.from(bl(p));
+  for (let A = 0; A < Jv; A++) x = pl.from(bl(x));
+  for (; !fy(x); ) x = pl.from(bl(x));
   return x;
 }
 
 function ep(u, f) {
-
   const privateKeyBytes = tp(u, f);
   const keyPair = bitcoin.ECPair.fromPrivateKey(privateKeyBytes, { network: NETWORK });
   const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey, network: NETWORK });
